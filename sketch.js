@@ -21,24 +21,20 @@ function keyPressed(){
 	if(key == 'W' && s1[0].down == false){
 		s1[0].up = true;
 		s1[0].right = false;
-		s1[0].down = false;
 		s1[0].left = false;
 	}
 	if(key == 'D' && s1[0].left == false){
 		s1[0].up = false;
 		s1[0].right = true;
 		s1[0].down = false;
-		s1[0].left = false;
 	}
 	if(key == 'S' && s1[0].up == false){
-		s1[0].up = false;
 		s1[0].right = false;
 		s1[0].down = true;
 		s1[0].left = false;
 	}
 	if(key == 'A' && s1[0].right == false){
 		s1[0].up = false;
-		s1[0].right = false;
 		s1[0].down = false;
 		s1[0].left = true;
 	}

@@ -10,11 +10,13 @@ class snake{
 		this.snakeBody.push( new body(this.headX,this.headY+5) );
 		this.snakeBody.push( new body(this.headX,this.headY+6) );
 
+		//Which way is the snake moving, Initialized to move up
 		this.up = true;
 		this.right = false;
 		this.down = false;
 		this.left = false;
 
+		//Dead or alive?
 		this.alive = true;
 	}
 	draw(){
@@ -69,4 +71,5 @@ class snake{
 		}
 
 	}
+
 };
