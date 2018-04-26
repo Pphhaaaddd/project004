@@ -129,26 +129,78 @@ class snake{
 
 	think(){
 
-		let inputs = [0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0];
-		inputs[0] = this.headX / gameWidth;
-		inputs[1] = this.headY / gameHeight;
+		let inputs = [0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0];
+		/*
+			23					2						5
+					22			1				4
+							21	0		3
+			20	19	18	H		6		7		8
+							15	12	29
+					16			13			10
+			1						14					11
+		*/
 
-		if(this.up)
-		inputs[2] = 1.0;
-		if(this.right)
-		inputs[3] = 1.0;
-		if(this.down)
-		inputs[4] = 1.0;
-		if(this.left)
-		inputs[5] = 1.0;
+		if(abs(this.food.x - this.headX) <= 3 && abs(this.food.y - this.headY) <= 3){
+				if(this.food.x == this.headX && this.food.y == this.headY-1)
+					inputs[0] = 1.0;
+				if(this.food.x == this.headX && this.food.y == this.headY-2)
+					inputs[1] = 1.0;
+				if(this.food.x == this.headX && this.food.y == this.headY-3)
+				inputs[2] = 1.0;
 
-		inputs[6] = this.food.x / gameWidth;
-		inputs[7] = this.food.y / gameHeight;
+				if(this.food.x == this.headX+1 && this.food.y == this.headY-1)
+				inputs[3] = 1.0;
+				if(this.food.x == this.headX+2 && this.food.y == this.headY-2)
+				inputs[4] = 1.0;
+				if(this.food.x == this.headX+3 && this.food.y == this.headY-3)
+				inputs[5] = 1.0;
 
-		//inputs = [1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0];
+				if(this.food.x == this.headX+1 && this.food.y == this.headY)
+				inputs[6] = 1.0;
+				if(this.food.x == this.headX+2 && this.food.y == this.headY)
+				inputs[7] = 1.0;
+				if(this.food.x == this.headX+3 && this.food.y == this.headY)
+				inputs[8] = 1.0;
+
+				if(this.food.x == this.headX+1 && this.food.y == this.headY+1)
+				inputs[9] = 1.0;
+				if(this.food.x == this.headX+2 && this.food.y == this.headY+2)
+				inputs[10] = 1.0;
+				if(this.food.x == this.headX+3 && this.food.y == this.headY+3)
+				inputs[11] = 1.0;
+
+				if(this.food.x == this.headX && this.food.y == this.headY+1)
+				inputs[12] = 1.0;
+				if(this.food.x == this.headX && this.food.y == this.headY+2)
+				inputs[13] = 1.0;
+				if(this.food.x == this.headX && this.food.y == this.headY+3)
+				inputs[14] = 1.0;
+
+				if(this.food.x == this.headX-1 && this.food.y == this.headY+1)
+				inputs[15] = 1.0;
+				if(this.food.x == this.headX-2 && this.food.y == this.headY+2)
+				inputs[16] = 1.0;
+				if(this.food.x == this.headX-3 && this.food.y == this.headY+3)
+				inputs[17] = 1.0;
+
+				if(this.food.x == this.headX-1 && this.food.y == this.headY)
+				inputs[18] = 1.0;
+				if(this.food.x == this.headX-2 && this.food.y == this.headY)
+				inputs[19] = 1.0;
+				if(this.food.x == this.headX-3 && this.food.y == this.headY)
+				inputs[20] = 1.0;
+
+				if(this.food.x == this.headX-1 && this.food.y == this.headY-1)
+				inputs[21] = 1.0;
+				if(this.food.x == this.headX-2 && this.food.y == this.headY-2)
+				inputs[22] = 1.0;
+				if(this.food.x == this.headX-3 && this.food.y == this.headY-3)
+				inputs[23] = 1.0;
+		}
+
 
 		let output = this.brain.predict(inputs);
-		//console.log(output);
+		//console.log(inputs);
 		if(output[0]>output[1] && output[0]>output[2] && output[0]>output[3])
 		this.moveUp();
 		else if(output[1]>output[2] && output[1]>output[3])

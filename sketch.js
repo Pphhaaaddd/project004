@@ -1,6 +1,6 @@
 //Suhail's Snake p5 Project 24/04/2018
 
-var myWidth = 200, myHeight = 100;
+var myWidth = 100, myHeight = 100;
 let s1 = [];
 let saveds1 = [];
 
@@ -12,7 +12,7 @@ let bestScore = 0;
 let bestSnake;
 
 //Number of snakes
-let noOfSnakes = 5;
+let noOfSnakes = 50;
 
 //Game block size (pixel)
 blockSize = 10;
@@ -61,7 +61,7 @@ function draw() {
 		}
 
 		if(s1.length == 0){
-			console.log(saveds1);
+			//console.log(saveds1);
 			nextGen();
 			generationNumber++;
 			message3.html("Generation : " + generationNumber);
