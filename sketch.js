@@ -1,6 +1,6 @@
 //Suhail's Snake p5 Project 24/04/2018
 
-var myWidth = 100, myHeight = 100;
+var myWidth = 300, myHeight = 300;
 let s1 = [];
 let saveds1 = [];
 

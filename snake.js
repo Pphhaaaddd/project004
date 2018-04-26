@@ -9,8 +9,8 @@ class snake{
 		this.snakeBody.push( new body(this.headX,this.headY+2) );
 
 		//Which way is the snake moving, Initialized to move up
-		this.up = true;
-		this.right = false;
+		this.up = false;
+		this.right = true;
 		this.down = false;
 		this.left = false;
 
@@ -107,7 +107,7 @@ class snake{
 				this.timeWithoutFood = 0;
 			}
 			else
-				this.timeWithoutFood++;
+			this.timeWithoutFood++;
 
 			if(this.timeWithoutFood > 5000){
 				this.score = 0;
@@ -130,77 +130,65 @@ class snake{
 	think(){
 
 		let inputs = [0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0];
-		/*
-			23					2						5
-					22			1				4
-							21	0		3
-			20	19	18	H		6		7		8
-							15	12	29
-					16			13			10
-			1						14					11
+
+		/* 1st - Food, 2nd Body, third- Boundary
+		17					20					23
+				16			19			22
+						15	18	21
+		14	13	12	H		0 	1 	2						  Snake movement--->>
+						9		6		3
+				10			7				4
+		11					8						5
 		*/
 
-		if(abs(this.food.x - this.headX) <= 3 && abs(this.food.y - this.headY) <= 3){
-				if(this.food.x == this.headX && this.food.y == this.headY-1)
-					inputs[0] = 1.0;
-				if(this.food.x == this.headX && this.food.y == this.headY-2)
-					inputs[1] = 1.0;
-				if(this.food.x == this.headX && this.food.y == this.headY-3)
-				inputs[2] = 1.0;
+		// Right direction
+		for(let i=this.headX+1; i < gameWidth ; i++){
+			let dist = abs(i-this.headX) / gameWidth;
+			//Check for food
+			if(i == this.food.x && this.headY==this.food.y){
 
-				if(this.food.x == this.headX+1 && this.food.y == this.headY-1)
-				inputs[3] = 1.0;
-				if(this.food.x == this.headX+2 && this.food.y == this.headY-2)
-				inputs[4] = 1.0;
-				if(this.food.x == this.headX+3 && this.food.y == this.headY-3)
-				inputs[5] = 1.0;
+				if(this.up)
+				inputs[6] =  dist;
+				if(this.right)
+				inputs[0] =  dist;
+				if(this.down)
+				inputs[18] =  dist;
+				if(this.left)
+				inputs[12] =  dist;
+			}
 
-				if(this.food.x == this.headX+1 && this.food.y == this.headY)
-				inputs[6] = 1.0;
-				if(this.food.x == this.headX+2 && this.food.y == this.headY)
-				inputs[7] = 1.0;
-				if(this.food.x == this.headX+3 && this.food.y == this.headY)
-				inputs[8] = 1.0;
+			//Check for body
+			let bodyFound = false;
+			for(let j=0;j<this.snakeBody.length;j++){
+				if(i == this.snakeBody[j].x && this.headY==this.snakeBody[j].y && !bodyFound){
+					if(this.up)
+					inputs[7] =  dist;
+					if(this.right)
+					inputs[1] =  dist;
+					if(this.down)
+					inputs[19] =  dist;
+					if(this.left)
+					inputs[13] =  dist;
+					bodyFound = true;
+				}
+			}
 
-				if(this.food.x == this.headX+1 && this.food.y == this.headY+1)
-				inputs[9] = 1.0;
-				if(this.food.x == this.headX+2 && this.food.y == this.headY+2)
-				inputs[10] = 1.0;
-				if(this.food.x == this.headX+3 && this.food.y == this.headY+3)
-				inputs[11] = 1.0;
-
-				if(this.food.x == this.headX && this.food.y == this.headY+1)
-				inputs[12] = 1.0;
-				if(this.food.x == this.headX && this.food.y == this.headY+2)
-				inputs[13] = 1.0;
-				if(this.food.x == this.headX && this.food.y == this.headY+3)
-				inputs[14] = 1.0;
-
-				if(this.food.x == this.headX-1 && this.food.y == this.headY+1)
-				inputs[15] = 1.0;
-				if(this.food.x == this.headX-2 && this.food.y == this.headY+2)
-				inputs[16] = 1.0;
-				if(this.food.x == this.headX-3 && this.food.y == this.headY+3)
-				inputs[17] = 1.0;
-
-				if(this.food.x == this.headX-1 && this.food.y == this.headY)
-				inputs[18] = 1.0;
-				if(this.food.x == this.headX-2 && this.food.y == this.headY)
-				inputs[19] = 1.0;
-				if(this.food.x == this.headX-3 && this.food.y == this.headY)
-				inputs[20] = 1.0;
-
-				if(this.food.x == this.headX-1 && this.food.y == this.headY-1)
-				inputs[21] = 1.0;
-				if(this.food.x == this.headX-2 && this.food.y == this.headY-2)
-				inputs[22] = 1.0;
-				if(this.food.x == this.headX-3 && this.food.y == this.headY-3)
-				inputs[23] = 1.0;
+			//Check for Boundary
+			if(i == gameWidth-1){
+				if(this.up)
+				inputs[8] =  dist;
+				if(this.right)
+				inputs[2] =  dist;
+				if(this.down)
+				inputs[20] =  dist;
+				if(this.left)
+				inputs[14] =  dist;
+			}
 		}
 
 
 		let output = this.brain.predict(inputs);
-		//console.log(inputs);
+		console.log(inputs);
 		if(output[0]>output[1] && output[0]>output[2] && output[0]>output[3])
 		this.moveUp();
 		else if(output[1]>output[2] && output[1]>output[3])
